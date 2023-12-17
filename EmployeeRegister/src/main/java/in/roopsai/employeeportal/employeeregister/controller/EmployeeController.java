@@ -18,7 +18,7 @@ public class EmployeeController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Employee save(@Valid  @RequestBody Employee employee) {
+    public Employee save(@Valid @RequestBody Employee employee) {
         return employeeService.save(employee);
     }
 
