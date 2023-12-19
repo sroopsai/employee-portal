@@ -7,6 +7,8 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 @Profile("testdata")
 public class EmployeeDataLoader {
@@ -19,9 +21,9 @@ public class EmployeeDataLoader {
 
     @EventListener(ApplicationReadyEvent.class)
     public void loadEmployeeTestData() {
+        employeeRepository.deleteAll();
         var employee1 = Employee.of( "sai", "Software Engineer");
         var employee2 = Employee.of( "sai", "Senior Software Engineer");
-        employeeRepository.save(employee1);
-        employeeRepository.save(employee2);
+        employeeRepository.saveAll(List.of(employee1, employee2));
     }
 }

@@ -24,6 +24,9 @@ public class EmployeeService {
     }
 
     public Employee save(Employee employee) {
+        if (employeeRepository.existsByName(employee.name())) {
+            throw new EmployeeAlreadyExistsException(employee.name());
+        }
         return employeeRepository.save(employee);
 
     }
