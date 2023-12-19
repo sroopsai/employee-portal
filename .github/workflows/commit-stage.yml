@@ -4,6 +4,7 @@ on: push
 env:
   REGISTY: ghcr.io
   IMAGE_NAME: sroopsai/employee-register
+  VERSION: latest
 
 jobs:
   build:
@@ -66,7 +67,7 @@ jobs:
         id: scan
         with:
           image:
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}.${{ env.VERSION }}
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.VERSION }}
           fail-build: false
           severity-cutoff: high
           acs-report-enable: true
