@@ -2,8 +2,7 @@ name: Commit Stage
 on: push
 
 env:
-  REGISTY: ghcr.io
-  IMAGE_NAME: sroopsai/employee-register
+  IMAGE_NAME: ghcr.io/sroopsai/employee-register
   VERSION: latest
 
 jobs:
@@ -60,14 +59,13 @@ jobs:
       - name: Build Container Image
         run: | 
           chmod +x gradlew
-          ./gradlew bootBuildImage \
-          --imageName ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.VERSION }}
+          ./gradlew bootBuildImage --imageName ${{ env.IMAGE_NAME }}:${{ env.VERSION }}
       - name: OCI Image Vulnerability
         uses: anchore/scan-action@v3
         id: scan
         with:
           image:
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.VERSION }}
+            ${{ env.IMAGE_NAME }}:${{ env.VERSION }}
           fail-build: false
           severity-cutoff: high
           acs-report-enable: true
@@ -83,4 +81,4 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Publish container image
-        run: docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.VERSION }}
+        run: docker push ${{ env.IMAGE_NAME }}:${{ env.VERSION }}
