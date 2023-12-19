@@ -1,5 +1,6 @@
 package in.roopsai.employeeportal.employeeregister.domain;
 
+import in.roopsai.employeeportal.employeeregister.persistence.Employee;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
@@ -23,14 +24,14 @@ public class BookValidationTests {
 
     @Test
     void whenAllFieldsAreValid() {
-        var employee = new Employee("123", "sai", "software engineer");
+        var employee = Employee.of( "sai", "software engineer");
         Set<ConstraintViolation<Employee>> violations = validator.validate(employee);
         assertThat(violations).isEmpty();
     }
 
     @Test
     void whenSomeFieldsAreValid() {
-        var employee = new Employee("123", "sai", "");
+        var employee = Employee.of( "sai", "");
         Set<ConstraintViolation<Employee>> violations = validator.validate(employee);
         assertThat(violations).hasSize(1);
         assertThat(violations.iterator().next().getMessage()).isEqualTo("Employee designation must be defined.");

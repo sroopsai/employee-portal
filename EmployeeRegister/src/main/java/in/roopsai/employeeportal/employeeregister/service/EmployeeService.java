@@ -1,7 +1,7 @@
 package in.roopsai.employeeportal.employeeregister.service;
 
-import in.roopsai.employeeportal.employeeregister.domain.Employee;
-import in.roopsai.employeeportal.employeeregister.domain.EmployeeRepository;
+import in.roopsai.employeeportal.employeeregister.persistence.Employee;
+import in.roopsai.employeeportal.employeeregister.persistence.EmployeeRepository;
 import in.roopsai.employeeportal.employeeregister.exceptions.EmployeeAlreadyExistsException;
 import in.roopsai.employeeportal.employeeregister.exceptions.EmployeeNotFoundException;
 import org.springframework.stereotype.Service;
@@ -15,19 +15,17 @@ public class EmployeeService {
         this.employeeRepository = employeeRepository;
     }
 
-    public Iterable<Employee> get() {
-        return employeeRepository.get();
+    public Iterable<Employee> getEmployees() {
+        return employeeRepository.findAll();
     }
 
-    public Employee get(String id) {
-        return employeeRepository.get(id).orElseThrow(() -> new EmployeeNotFoundException(id));
+    public Employee getEmployee(String name) {
+        return employeeRepository.findEmployeeByNameIs(name).orElseThrow(() -> new EmployeeNotFoundException(name));
     }
 
     public Employee save(Employee employee) {
-        if (employeeRepository.has(employee.id())) {
-            throw new EmployeeAlreadyExistsException(employee.id());
-        }
         return employeeRepository.save(employee);
+
     }
 
     public Employee update(String id, Employee employee) {
@@ -36,7 +34,7 @@ public class EmployeeService {
 
     }
 
-    public void delete(String id) {
-        employeeRepository.delete(id);
+    public void delete(String name) {
+        employeeRepository.deleteByName(name);
     }
 }

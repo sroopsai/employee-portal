@@ -1,6 +1,6 @@
 package in.roopsai.employeeportal.employeeregister.controller;
 
-import in.roopsai.employeeportal.employeeregister.domain.Employee;
+import in.roopsai.employeeportal.employeeregister.persistence.Employee;
 import in.roopsai.employeeportal.employeeregister.service.EmployeeService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -24,12 +24,12 @@ public class EmployeeController {
 
     @GetMapping
     public Iterable<Employee> get() {
-        return employeeService.get();
+        return employeeService.getEmployees();
     }
 
-    @GetMapping("{id}")
-    public Employee get(@PathVariable String id) {
-        return employeeService.get(id);
+    @GetMapping("{name}")
+    public Employee get(@PathVariable String name) {
+        return employeeService.getEmployee(name);
     }
 
     @PutMapping("{id}")
