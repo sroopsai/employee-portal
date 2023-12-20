@@ -1,10 +1,12 @@
+server:
+  port: 9001
+employee:
+  greeting: Welcome to Config Store Employee Register
 spring:
-  application:
-    name: employee-register
-  config:
-    import: "optional:configserver:"
-  cloud:
-    config:
-      uri: http://localhost:8888
-  profiles:
-    active: "integration"
+  datasource:
+    url: jdbc:postgresql://localhost:5432/employee-register-db
+    username: admin
+    password: admin
+    hikari:
+      connection-timeout: 2000
+      maximum-pool-size: 5
