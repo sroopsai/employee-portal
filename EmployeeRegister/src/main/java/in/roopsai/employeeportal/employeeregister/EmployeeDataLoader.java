@@ -23,6 +23,5 @@ public class EmployeeDataLoader {
     public void loadEmployeeTestData() {
         var employee1 = Employee.of( "sai", "Software Engineer");
         var employee2 = Employee.of( "sai", "Senior Software Engineer");
-        employeeRepository.saveAll(List.of(employee1, employee2));
     }
 }
