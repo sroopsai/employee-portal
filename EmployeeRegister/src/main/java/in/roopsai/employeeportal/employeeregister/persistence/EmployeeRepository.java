@@ -14,10 +14,7 @@ public interface EmployeeRepository extends CrudRepository<Employee, Long> {
 
     Optional<Employee> findEmployeeByNameIs(String name);
 
-    @Modifying
-    @Transactional
-    @Query("delete from Employee where name = :name")
-    void deleteByName(String name);
+
 
 
 }
