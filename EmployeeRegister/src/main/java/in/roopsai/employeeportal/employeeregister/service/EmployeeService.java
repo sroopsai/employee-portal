@@ -38,6 +38,6 @@ public class EmployeeService {
     }
 
     public void delete(String name) {
-        employeeRepository.deleteByName(name);
+       // employeeRepository.deleteByName(name);
     }
 }
